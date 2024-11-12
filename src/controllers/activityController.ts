@@ -2,17 +2,30 @@ import { Request, Response } from 'express';
 import { logActivity, getActivityLogs} from '../services/activityLogger';
 import { createActivityLogSchema, getActivityLogSchema } from '../validations/activityLogsValidation';
 import redis from '../config/cache';
+import { z , ZodError} from 'zod';
+let formattedErrors: string[] = []; 
+
 
 
 
 export const logUserActivity = async (req: Request, res: Response) => {
     try{
-        createActivityLogSchema.parse(req.body);
-        const { userId, action, service } = req.body;
-        await logActivity(userId, action, service);
+        console.log("++++++++")
+        const a = createActivityLogSchema.parse(req.body);
+        console.log("0000_))))))",a)
+        const { userId, action, service, projectId} = req.body;
+        await logActivity(userId, action, service,projectId);
         res.status(201).json({ message: 'Activity logged.' });
     } catch (error) {
-        res.status(500).json({ error });
+        if (error instanceof ZodError) {
+            formattedErrors = error.errors.map(
+              (err) => `field ${err.path.join(".")}: ${err.message}`
+            );
+            res.status(500).json({ error : formattedErrors });
+        }else{
+            console.log("000000",error)
+            res.status(500).json({ error });
+        }
     }
     
 };

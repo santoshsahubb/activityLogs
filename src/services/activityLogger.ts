@@ -7,12 +7,13 @@ import { activityLogs } from "../schemas";
 
 
 
-export const logActivity = async (userId : string , action  : string , service : string ) =>{
+export const logActivity = async (userId : string , action  : string , service : string , projectId : string) =>{
    await db.insert(activityLogs).values({
         // timestamp: new Date(),
         user_id: userId,
         action,
         service,
+        project_id: projectId,
     });
 }
 

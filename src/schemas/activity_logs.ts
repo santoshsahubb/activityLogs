@@ -20,6 +20,8 @@ export const activityLogs = pgTable('activity_logs', {
 
   user_id: varchar('user_id').notNull(),
   action: varchar('action').notNull(),
-  service: varchar('service').notNull()
+  service: varchar('service').notNull(),
+  project_id: varchar('project_id').notNull(),
+
 
 });

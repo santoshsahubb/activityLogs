@@ -1,12 +1,12 @@
 
 import { Redis } from "iovalkey";
 const redis = new Redis();
-// redis.set("mykey", "value");
+redis.on('connect', () => {
+  console.log("Redis connected successfully.");
+});
 
-
-// redis.get("mykey").then((result) => {
-//     console.log(result); // Prints "value"
-//   });
-
+redis.on('error', (err) => {
+  console.error("Redis connection error:", err);
+});
 
   export default redis;
