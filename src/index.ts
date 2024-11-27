@@ -6,4 +6,6 @@ import activityRoutes from './routes/activityRoutes';
 const app = express();
 app.use(express.json());
 app.use('/activity', activityRoutes);
-app.listen(3000, () => console.log('Server running on port 3000'));
+// app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(3000, '0.0.0.0', () => console.log('Server running on port 3000 globally'));
+
