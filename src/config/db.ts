@@ -22,7 +22,7 @@ export const db = drizzle(pool,{
 (async () => {
   try {
     await db.execute(`SELECT 1`);
-    console.log("postgres connection successful!!!");
+    console.log("postgres connection successful--");
   } catch (error) {
     console.error("postgres connection failed:", error);
   }
