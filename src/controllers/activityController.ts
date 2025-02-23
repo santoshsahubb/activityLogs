@@ -41,7 +41,7 @@ export const fetchActivityLogs = async (req: Request, res: Response) => {
             if(result ==  null ){
                 const logs = await getActivityLogs(filters);
                 console.log("000000",logs)
-                redis.set(key, JSON.stringify(logs));
+                redis.set(key, JSON.stringify(logs), 'EX', 5); // EX sets the expiry in seconds
                 res.status(200).json(logs); 
             }else{
                 res.status(200).json(JSON.parse(result)); 

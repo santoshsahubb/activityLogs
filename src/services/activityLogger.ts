@@ -1,7 +1,7 @@
 import { timeStamp } from 'console';
 import { db } from '../config/db';
 import { eq } from 'drizzle-orm';
-import { activityLogs } from "../schemas";
+import { activityLogs } from "../schema";
 
 
 
